@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesotho Finest Mixes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1><i class="fas fa-music"></i> Lesotho Finest Mixes</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search mixes...">
+                <button onclick="searchMixes()">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#all-mixes" class="active"><i class="fas fa-list"></i> All Mixes</a></li>
+            <li><a href="#deep-house"><i class="fas fa-headphones"></i> Deep House</a></li>
+            <li><a href="#piano"><i class="fas fa-piano-keyboard"></i> Piano</a></li>
+            <li><a href="#hip-hop"><i class="fas fa-microphone"></i> Hip-Hop</a></li>
+            <li><a href="#rnb"><i class="fas fa-heart"></i> RnB</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="upload-section">
+            <h2><i class="fas fa-upload"></i> Upload Your Mix</h2>
+            <form id="upload-form">
+                <div class="form-group">
+                    <label for="dj-name"><i class="fas fa-user"></i> DJ Name:</label>
+                    <input type="text" id="dj-name" required placeholder="Enter your DJ name">
+                </div>
+
+                <div class="form-group">
+                    <label for="description"><i class="fas fa-align-left"></i> Description:</label>
+                    <textarea id="description" required placeholder="Describe your mix..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="location"><i class="fas fa-map-marker-alt"></i> Location:</label>
+                    <input type="text" id="location" required placeholder="Where are you from?">
+                </div>
+
+                <div class="form-group">
+                    <label for="audio-file"><i class="fas fa-file-audio"></i> Audio File:</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="audio-file" accept="audio/*" required>
+                        <span id="file-name">No file chosen</span>
+                        <button type="button" class="browse-btn">Browse</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="upload-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Upload Mix
+                </button>
+            </form>
+        </section>
+
+        <section id="mixes-section">
+            <h2><i class="fas fa-compact-disc"></i> Latest Mixes</h2>
+            <div id="loading-indicator">
+                <i class="fas fa-spinner fa-spin"></i> Loading mixes...
+            </div>
+            <div id="mixes-container">
+                <!-- Mixes will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <div id="music-player-container">
+        <div class="player-controls">
+            <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+            <div class="progress-container">
+                <progress id="progress-bar" value="0" max="100"></progress>
+                <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.7">
+            </div>
+        </div>
+        <audio id="music-player">
+            Your browser does not support the audio element.
+        </audio>
+        <button id="download-button" class="download-btn">
+            <i class="fas fa-download"></i> Download
+        </button>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="disclaimer">
+                <p><i class="fas fa-exclamation-circle"></i> Disclaimer: Any music uploaded is not owned by this website.</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Leboea NI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // File input display
+        document.getElementById('audio-file').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        // Browse button functionality
+        document.querySelector('.browse-btn').addEventListener('click', function() {
+            document.getElementById('audio-file').click();
+        });
+    </script>
+</body>
+</html>
